@@ -11,6 +11,9 @@ import { PeopleComponent } from './components/admin/people.component';
 import { CategoriesComponent } from './components/admin/categories.component';
 import { AddPersonComponent } from './components/admin/add-person.component';
 import { PersonListComponent } from './components/admin/person-list.component';
+import { AddCategoryComponent } from './components/admin/add-category.component';
+import { CategoryListComponent } from './components/admin/category-list.component';
+
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -21,7 +24,9 @@ export const sharedConfig: NgModule = {
         PeopleComponent,
         CategoriesComponent,
         AddPersonComponent,
-        PersonListComponent
+        PersonListComponent,
+        AddCategoryComponent,
+        CategoryListComponent
     ],
     providers: [
         ToastrService

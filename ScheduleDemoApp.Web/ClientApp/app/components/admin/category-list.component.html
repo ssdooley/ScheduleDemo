@@ -1,0 +1,7 @@
+﻿<div class="input-group" *ngFor="let category of categories" style="margin-top: 10px;">
+    <input [(ngModel)]="category.name" class="form-control" />
+    <div class="input-group-btn">
+        <button class="btn btn-warning" (click)="editCategory(category)">Edit</button>
+        <button class="btn btn-danger" (click)="deleteCategory(category)">Delete</button>
+    </div>
+</div>
