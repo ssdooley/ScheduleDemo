@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b95dccff4e7a1e36fde0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f085b3f2f00d78b95e1f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -888,9 +888,6 @@ var PersonService = (function () {
         this.person = this.personSubject.asObservable();
         this.newPerson = this.newPersonSubject.asObservable();
     }
-    PersonService.prototype.setPerson = function (person) {
-        this.personSubject.next(person);
-    };
     PersonService.prototype.getPeople = function () {
         var _this = this;
         this.http.get('/api/People/GetSimplePeople')

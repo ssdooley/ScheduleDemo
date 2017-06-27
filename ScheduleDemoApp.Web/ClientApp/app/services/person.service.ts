@@ -19,10 +19,6 @@ export class PersonService {
     person = this.personSubject.asObservable();
     newPerson = this.newPersonSubject.asObservable();
 
-    setPerson(person: Person): void {
-        this.personSubject.next(person);
-    }
-
     getPeople(): void {
         this.http.get('/api/People/GetSimplePeople')
             .map(this.extractData)
