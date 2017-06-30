@@ -95,8 +95,6 @@ export class CategoryService {
         });
     }
 
-
-
     private extractData(res: Response) {
         return res.json() || {};
     }

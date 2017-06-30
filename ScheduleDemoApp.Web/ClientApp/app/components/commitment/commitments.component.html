@@ -1,0 +1,42 @@
+﻿<h2>Commitments</h2>
+<hr />
+<div *ngIf="people">
+    <div class="input-group">
+        <div class="input-group-addon">Personal Commitments</div>
+        <select class="form-control" [(ngModel)]="person">
+            <option *ngFor="let person of people" [ngValue]="person">{{person.name}}</option>
+        </select>
+        <div class="input-group-btn">
+            <button class="btn btn-success" (click)="retrievePersonalCommitments()">Retrieve</button>
+            <button class="btn btn-warning" (click)="clearPersonalCommitments()">Clear</button>
+        </div>
+    </div>
+    <hr />
+</div>
+<div *ngIf="isPersonal">
+    <h3>Personal Commitments for {{person.name}}</h3>
+    <hr />
+</div>
+<div *ngIf="commitments">
+    <div *ngFor="let commitment of commitments">
+        <h3>Subject: {{commitment.subject}}</h3>
+        <hr />
+        <p>Id: {{commitment.id}}</p>
+        <p>Location: {{commitment.location}}</p>
+        <p>Body: {{commitment.body}}</p>
+        <p>Start Date: {{commitment.startDate}}</p>
+        <p>End Date: {{commitment.endDate}}</p>
+        <p>Category: {{commitment.category.name}}</p>
+        <div *ngIf="commitment.people">
+            <h3>People</h3>
+            <hr />
+            <p *ngFor="let person of commitment.people">{{person.name}}</p>
+        </div>
+        <div *ngIf="!commitment.people">
+            <h3>No People Found!</h3>
+        </div>
+    </div>
+</div>
+<div *ngIf="!commitments">
+    <h3>No Commitments Found!</h3>
+</div>

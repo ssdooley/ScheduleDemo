@@ -13,6 +13,7 @@ import { AddPersonComponent } from './components/admin/add-person.component';
 import { PersonListComponent } from './components/admin/person-list.component';
 import { AddCategoryComponent } from './components/admin/add-category.component';
 import { CategoryListComponent } from './components/admin/category-list.component';
+import { CommitmentsComponent } from './components/commitment/commitments.component';
 
 
 export const sharedConfig: NgModule = {
@@ -26,7 +27,8 @@ export const sharedConfig: NgModule = {
         AddPersonComponent,
         PersonListComponent,
         AddCategoryComponent,
-        CategoryListComponent
+        CategoryListComponent,
+        CommitmentsComponent
     ],
     providers: [
         ToastrService

@@ -14,6 +14,6 @@ namespace ScheduleDemoApp.Models.ViewModels
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         public CategoryModel category { get; set; }
-        public IEnumerable<CommitmentPersonModel> commitmentPeople { get; set; }
+        public IEnumerable<PersonModel> people { get; set; }
     }
 }
