@@ -16,6 +16,7 @@ export class CommitmentsComponent implements OnInit {
     commitments: Array<Commitment> = new Array<Commitment>();
     people: Array<Person> = new Array<Person>();
     person: Person;
+    commitment: Commitment = new Commitment();
     isPersonal: boolean = false;
 
     constructor(private commitmentService: CommitmentService, private personService: PersonService) {
@@ -26,6 +27,8 @@ export class CommitmentsComponent implements OnInit {
         personService.people.subscribe(people => {
             this.people = people;
         });
+
+        this.commitment.people = new Array<Person>();
     }
 
     ngOnInit() {
@@ -33,9 +36,26 @@ export class CommitmentsComponent implements OnInit {
         this.personService.getPeople();
     };
 
-    updatePerson(person: Person) {
+    addCommitmentPerson(person: Person) {
         this.person.id = person.id;
         this.person.name = person.name;
+    }
+
+    addSelectedPerson() {
+        let index = this.commitment.people.indexOf(this.person);
+
+        if (index < 0) {
+            this.commitment.people.push(this.person)
+        }
+    }
+
+    createCommitment() {
+        this.commitmentService.addCommitment(this.commitment);
+    }
+
+    removePerson(person: Person) {
+        let index = this.commitment.people.indexOf(this.person);
+        this.commitment.people.splice(index, 1);
     }
 
     retrievePersonalCommitments() {

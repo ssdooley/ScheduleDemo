@@ -7,6 +7,7 @@
             <option *ngFor="let person of people" [ngValue]="person">{{person.name}}</option>
         </select>
         <div class="input-group-btn">
+            <button class="btn btn-success" (click)="addSelectedPerson()">Add</button>
             <button class="btn btn-success" (click)="retrievePersonalCommitments()">Retrieve</button>
             <button class="btn btn-warning" (click)="clearPersonalCommitments()">Clear</button>
         </div>
@@ -17,23 +18,37 @@
     <h3>Personal Commitments for {{person.name}}</h3>
     <hr />
 </div>
-<div *ngIf="commitments">
-    <div *ngFor="let commitment of commitments">
-        <h3>Subject: {{commitment.subject}}</h3>
-        <hr />
-        <p>Id: {{commitment.id}}</p>
-        <p>Location: {{commitment.location}}</p>
-        <p>Body: {{commitment.body}}</p>
-        <p>Start Date: {{commitment.startDate}}</p>
-        <p>End Date: {{commitment.endDate}}</p>
-        <p>Category: {{commitment.category.name}}</p>
-        <div *ngIf="commitment.people">
-            <h3>People</h3>
-            <hr />
-            <p *ngFor="let person of commitment.people">{{person.name}}</p>
-        </div>
-        <div *ngIf="!commitment.people">
-            <h3>No People Found!</h3>
+<div *ngIf="commitment">
+    <div *ngIf="commitment.people">
+        <table class="table table-striped">
+            <tbody>
+                <tr *ngFor="let person of commitment.people">
+                    <td>{{person.name}}</td>
+                    <td>
+                        <button class="btn btn-danger btn-xs" (click)="removePerson(person)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="commitments">
+            <div *ngFor="let commitment of commitments">
+                <h3>Subject: {{commitment.subject}}</h3>
+                <hr />
+                <p>Id: {{commitment.id}}</p>
+                <p>Location: {{commitment.location}}</p>
+                <p>Body: {{commitment.body}}</p>
+                <p>Start Date: {{commitment.startDate}}</p>
+                <p>End Date: {{commitment.endDate}}</p>
+                <p>Category: {{commitment.category.name}}</p>
+                <div *ngIf="commitment.people">
+                    <h3>People</h3>
+                    <hr />
+                    <p *ngFor="let person of commitment.people">{{person.name}}</p>
+                </div>
+                <div *ngIf="!commitment.people">
+                    <h3>No People Found!</h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>

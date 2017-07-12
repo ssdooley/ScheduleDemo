@@ -71,5 +71,79 @@ namespace ScheduleDemoApp.Models.Extensions
 
             return model;
         }
+
+        public static async Task<CommitmentModel> GetSimpleCommitment(this AppDbContext db, int id)
+        {
+            var commitment = await db.Commitments.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
+
+            var model = new CommitmentModel
+            {
+                id = commitment.Id,
+                location = commitment.Location,
+                subject = commitment.Subject,
+                body = commitment.Body,
+                category = new CategoryModel
+                {
+                    id = commitment.CategoryId,
+                    name = commitment.Category.Name
+                },
+                startDate = commitment.StartDate,
+                endDate = commitment.EndDate
+
+            };
+            return model;
+        }
+
+        public static async Task AddCommitment(this AppDbContext db, CommitmentModel model)
+        {
+            if (await model.Validate(db))
+            {
+                var commitment = new Commitment
+                {
+                    Id = model.id,
+                    Location = model.location,
+                    Subject = model.subject,
+                    Body = model.body,
+                    StartDate = model.startDate,
+                    EndDate = model.endDate,
+                    CategoryId = model.category.id
+                };
+
+                await db.Commitments.AddAsync(commitment);
+                await db.SaveChangesAsync();
+            }
+        }
+
+        public static async Task UpdateCommitment(this AppDbContext db, CommitmentModel model)
+        {
+            if (await model.Validate(db))
+            {
+                var commitment = await db.Commitments.FindAsync(model.id);
+                commitment.Category.Id = model.category.id;
+                await db.SaveChangesAsync();
+            }
+        }
+
+        public static async Task DeleteCommitment(this AppDbContext db, int id)
+        {
+            var commitment = await db.Commitments.FindAsync(id);
+            db.Commitments.Remove(commitment);
+            await db.SaveChangesAsync();
+        }
+
+        public static Task<bool> Validate(this CommitmentModel model, AppDbContext db)
+        {
+            return Task.Run(() =>
+            {
+                if (model.startDate >= model.endDate)
+                {
+                    throw new Exception("Start Date must occur before End Date");
+                }
+
+                return true;
+            });
+        }
+
+        
     }
 }

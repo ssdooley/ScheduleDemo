@@ -30,5 +30,34 @@ namespace ScheduleDemoApp.Controllers
         {
             return await db.GetPersonalCommitments(id);
         }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<CommitmentModel> GetSimpleCommitment([FromRoute]int id)
+        {
+            return await db.GetSimpleCommitment(id);
+        }
+
+
+        [HttpGet("[action]/{id}")]
+        public async Task<ObjectResult> AddCommittment([FromBody]CommitmentModel model)
+        {
+            await db.AddCommitment(model);
+            return Created("/api/Commitments/AddCommitment", model);
+        }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<ObjectResult> UpdateCommittment([FromBody]CommitmentModel model)
+        {
+            await db.UpdateCommitment(model);
+            return Created("/api/Commitments/UpdateCommitment", model);
+        }
+
+
+        [HttpGet("[action]/{id}")]
+        public async Task<ObjectResult> DeleteCommittment([FromBody]int id)
+        {
+            await db.DeleteCommitment(id);
+            return Created("/api/Commitments/DeleteCommitment", id);
+        }
     }
 }
